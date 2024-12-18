@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='simple-login-database.css') }}">
+
+</head>
+
+<body>
+
+    <!--Navigation bar-->
+    <div class="navigation-container">
+        <ul class="navigation-bar2">
+            <li><a class="active" href="/display1">Information</a></li>
+            <li class="last-child"><a href="/login">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- For flash message -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">
+                    <span>{{ message }}</span>
+                    <button type="button" class="close-btn">&times;</button>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    <label>{{ name }}</label>
+    <div class="big-container">
+        <strong class="display-label">Information for Users</strong>
+
+        <!-- Disply account information -->
+        <div class="account-info">
+            {% for key, value in account_dict.items() %}
+                {% if  key == 'key0' %}
+                    {% set name = value %}
+                    <div class="vertical-group">
+                        <label>Name: </label>
+                        <label>{{ name }}</label>
+                    </div>
+                {% elif  key == 'key1' %}
+                    {% set id = value %}
+                    <div class="vertical-group">
+                        <label>ID: </label>
+                        <label>{{ id }}</label>
+                    </div>
+                {% elif  key == 'key2' %}
+                    {% set age = value %}
+                    <div class="vertical-group">
+                        <label>Age: </label>
+                        <label>{{ age }}</label>
+                    </div>
+                {% elif  key == 'key4' %}
+                    {% set position = value %}
+                    <div class="vertical-group">
+                        <label>Position: </label>
+                        <label>{{ position }}</label>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

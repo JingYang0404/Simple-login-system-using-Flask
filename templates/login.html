@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='simple-login-database.css') }}">
+
+</head>
+<body>
+    <!-- For flash message -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">
+                    <span>{{ message }}</span>
+                    <button type="button" class="close-btn">&times;</button>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    
+    <div class="big-container">
+        <h class="login-h">SYSTEM LOGIN</h>
+
+        <form id="general-information-form" action="/login" method = "post">
+            <div class="login-container">
+                <!-- Create a class to encapsulate label and input to allow side by side positioning -->
+                <div class="login-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" class="login-input" placeholder="Enter Name here ... " autocomplete="off" required>
+                </div>
+    
+                <div class="login-group">
+                    <label for="password">Password :</label>
+                    <input type="password" id="password" name="password" class="login-input" placeholder="Enter Password here ..." autocomplete="off" required>
+                </div>
+
+                <div class="login-group">
+                    <label for="position">Position:</label>
+                    <input type="text" id="position" name="position" class="login-input" placeholder="Enter position here .. (If no position, enter 'User')" autocomplete="off" required>
+                </div>
+
+                <div class="login-group">
+                    <input type="submit" class="login-button" value="Log In">
+                </div>
+            </div>
+        </form>
+
+        <p class="bottom">Don't have an account?  <a class="bottom" href="{{'/register'}}"> Sign Up here</a></p>
+    </div>
+</body>
+</html>
